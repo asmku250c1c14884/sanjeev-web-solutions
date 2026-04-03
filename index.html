@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sanjeev Web Solutions — Dindigul</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f5f2ed;--ink:#0f0e0c;--accent:#e85d2f;--accent2:#1a1a2e;--muted:#7a7570;--border:#e0dbd3}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;cursor:none}
+.cursor{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999}
+.cursor-ring{width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width 0.2s,height 0.2s,opacity 0.2s}
+.cursor-ring.expand{width:60px;height:60px;opacity:0.5}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:var(--bg);padding:0.6rem 1.5rem;font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:none;cursor:none;transition:background 0.2s}
+.nav-cta:hover{background:var(--accent)}
+.hero{min-height:92vh;display:grid;grid-template-columns:1fr 1fr;padding:4rem 3rem;gap:3rem;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:0;top:0;width:50%;height:100%;background:var(--accent2);z-index:0}
+.hero-left{position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1.8rem}
+.hero-eyebrow::before{content:'';width:2rem;height:1.5px;background:var(--accent)}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:800;line-height:1.0;letter-spacing:-0.03em;color:var(--ink);margin-bottom:1.8rem}
+.hero h1 .accent{color:var(--accent);display:block}
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.75;max-width:420px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-dark{background:var(--ink);color:var(--bg);padding:0.85rem 2rem;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:none;cursor:none;transition:background 0.2s}
+.btn-dark:hover{background:var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink);padding:0.85rem 2rem;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1.5px solid var(--ink);cursor:none;transition:all 0.2s}
+.btn-ghost:hover{background:var(--ink);color:var(--bg)}
+.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;gap:2rem;padding-left:3rem}
+.hero-stat{border-left:2px solid var(--accent);padding-left:1.2rem}
+.hero-stat .num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:var(--bg);line-height:1}
+.hero-stat .lbl{font-size:0.72rem;color:rgba(245,242,237,0.4);text-transform:uppercase;letter-spacing:0.12em;margin-top:0.3rem}
+.hero-badge{position:absolute;bottom:3rem;right:3rem;width:110px;height:110px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:spin 12s linear infinite}
+.hero-badge-inner{animation:spin 12s linear infinite reverse;font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:800;color:#fff;text-align:center;line-height:1.4;letter-spacing:0.04em}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ticker{background:var(--accent);padding:0.8rem 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-flex;animation:tick 20s linear infinite}
+.ticker-item{font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;padding:0 2.5rem}
+.ticker-item::after{content:'★';margin-left:2.5rem;opacity:0.6}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.services{padding:6rem 3rem}
+.section-eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:3.5rem}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.svc{background:var(--bg);padding:2.5rem 2rem;transition:background 0.25s;cursor:none;position:relative;overflow:hidden}
+.svc::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.3s}
+.svc:hover{background:var(--ink)}
+.svc:hover::after{width:100%}
+.svc-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:var(--border);margin-bottom:1.2rem;transition:color 0.25s}
+.svc:hover .svc-num{color:var(--accent)}
+.svc h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.6rem;transition:color 0.25s}
+.svc:hover h3{color:var(--bg)}
+.svc p{font-size:0.82rem;color:var(--muted);line-height:1.65;transition:color 0.25s}
+.svc:hover p{color:rgba(245,242,237,0.5)}
+.process{padding:6rem 3rem;background:var(--ink)}
+.process .section-eyebrow{color:var(--accent)}
+.process .section-title{color:var(--bg)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3.5rem}
+.step{position:relative}
+.step-num{font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:rgba(255,255,255,0.06);line-height:1;margin-bottom:1rem}
+.step h4{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--bg);margin-bottom:0.5rem}
+.step p{font-size:0.8rem;color:rgba(245,242,237,0.4);line-height:1.65}
+.why{padding:6rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.why-left p{color:var(--muted);line-height:1.8;font-size:0.92rem;margin-bottom:2rem}
+.why-right{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.wstat{background:var(--bg);padding:2rem;text-align:center;transition:background 0.25s;cursor:none}
+.wstat:hover{background:var(--accent)}
+.wstat:hover .wnum,.wstat:hover .wlbl{color:#fff}
+.wnum{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;color:var(--ink);transition:color 0.25s}
+.wlbl{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-top:0.3rem;transition:color 0.25s}
+.pricing{padding:6rem 3rem;background:var(--accent2)}
+.pricing .section-eyebrow{color:var(--accent)}
+.pricing .section-title{color:var(--bg)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08)}
+.plan{background:var(--accent2);padding:2.5rem 2rem}
+.plan.hot{background:var(--accent)}
+.plan-lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.4);margin-bottom:1rem}
+.plan.hot .plan-lbl{color:rgba(255,255,255,0.8)}
+.plan h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--bg);margin-bottom:0.5rem}
+.plan-price{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;color:var(--bg);margin:1rem 0;line-height:1}
+.plan-price sub{font-size:1rem;font-weight:400;opacity:0.55}
+.plan ul{list-style:none;margin:1.5rem 0 2rem}
+.plan ul li{font-size:0.82rem;color:rgba(245,242,237,0.5);padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.plan ul li::before{content:'→ ';color:var(--accent)}
+.plan.hot ul li{color:rgba(255,255,255,0.85);border-bottom-color:rgba(255,255,255,0.15)}
+.plan.hot ul li::before{color:#fff}
+.plan-btn{width:100%;padding:0.8rem;font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,0.2);background:transparent;color:var(--bg);cursor:none;transition:all 0.2s}
+.plan.hot .plan-btn{border-color:#fff;background:#fff;color:var(--accent)}
+.plan-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.plan.hot .plan-btn:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.contact{padding:6rem 3rem;display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start}
+.contact-left h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:1.2rem}
+.contact-left p{color:var(--muted);font-size:0.9rem;line-height:1.8;margin-bottom:2.5rem}
+.cd{margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)}
+.cd-lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--accent);margin-bottom:0.3rem}
+.cd-val{font-size:0.92rem;color:var(--ink);font-weight:500}
+.form{display:flex;flex-direction:column;gap:0.9rem}
+.form input,.form textarea,.form select{background:#fff;border:1px solid var(--border);color:var(--ink);padding:0.9rem 1.1rem;font-family:'Inter',sans-serif;font-size:0.88rem;width:100%;outline:none;transition:border-color 0.2s;-webkit-appearance:none}
+.form input::placeholder,.form textarea::placeholder{color:#bbb}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--accent)}
+.form textarea{height:130px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem}
+.submit-btn{background:var(--accent);color:#fff;padding:0.95rem 2.5rem;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:none;cursor:none;transition:background 0.2s;align-self:flex-start}
+.submit-btn:hover{background:var(--ink)}
+footer{background:var(--ink);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center}
+.footer-logo{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:rgba(245,242,237,0.5)}
+.footer-logo span{color:var(--accent)}
+.footer-copy{font-size:0.72rem;color:rgba(245,242,237,0.22)}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:3rem 1.5rem}
+  .hero::before{display:none}
+  .hero-right{padding-left:0;flex-direction:row;flex-wrap:wrap;gap:1.5rem}
+  .hero-stat .num{color:var(--ink)}.hero-stat .lbl{color:var(--muted)}
+  .hero-badge{display:none}
+  .services,.process,.why,.pricing,.contact{padding:3.5rem 1.5rem}
+  .services-grid,.plans{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .why,.contact{grid-template-columns:1fr;gap:2.5rem}
+  footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center}
+}
+@media(max-width:500px){.steps{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<nav>
+  <a class="logo" href="#">SWS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Free Quote</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Web Design · Dindigul, TN</div>
+    <h1>We Build Sites<span class="accent">That Sell.</span></h1>
+    <p class="hero-sub">Professional websites for Tamil Nadu businesses. Fast delivery, honest pricing, zero headaches.</p>
+    <div class="hero-btns">
+      <button class="btn-dark" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start My Project</button>
+      <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">See Our Work</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat"><div class="num">50+</div><div class="lbl">Sites Delivered</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="lbl">Day Avg Delivery</div></div>
+    <div class="hero-stat"><div class="num">5★</div><div class="lbl">Client Rating</div></div>
+    <div class="hero-badge"><div class="hero-badge-inner">FREE<br/>QUOTE<br/>TODAY</div></div>
+  </div>
+</section>
+
+<div class="ticker"><div class="ticker-inner">
+  <span class="ticker-item">Business Websites</span><span class="ticker-item">Portfolio Sites</span><span class="ticker-item">Landing Pages</span><span class="ticker-item">E-Commerce Stores</span><span class="ticker-item">Website Redesign</span><span class="ticker-item">Fast Delivery</span>
+  <span class="ticker-item">Business Websites</span><span class="ticker-item">Portfolio Sites</span><span class="ticker-item">Landing Pages</span><span class="ticker-item">E-Commerce Stores</span><span class="ticker-item">Website Redesign</span><span class="ticker-item">Fast Delivery</span>
+</div></div>
+
+<section class="services" id="services">
+  <div class="section-eyebrow">What We Offer</div>
+  <h2 class="section-title">Our Services</h2>
+  <div class="services-grid">
+    <div class="svc"><div class="svc-num">01</div><h3>Business Websites</h3><p>Professional sites that build trust and convert visitors into customers.</p></div>
+    <div class="svc"><div class="svc-num">02</div><h3>Portfolio Sites</h3><p>Showcase your skills beautifully to attract more clients.</p></div>
+    <div class="svc"><div class="svc-num">03</div><h3>Landing Pages</h3><p>High-converting single pages built to capture leads for your business.</p></div>
+    <div class="svc"><div class="svc-num">04</div><h3>E-Commerce Stores</h3><p>Sell your products online with a fast, secure, easy-to-manage store.</p></div>
+    <div class="svc"><div class="svc-num">05</div><h3>Website Redesign</h3><p>Transform your old site into a modern, mobile-friendly experience.</p></div>
+    <div class="svc"><div class="svc-num">06</div><h3>Maintenance & Support</h3><p>Monthly updates and support to keep your site running perfectly.</p></div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">Simple 4-Step Process</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h4>Discovery Call</h4><p>We understand your business, goals, and what you need.</p></div>
+    <div class="step"><div class="step-num">02</div><h4>Design & Build</h4><p>We design and develop — keeping you updated throughout.</p></div>
+    <div class="step"><div class="step-num">03</div><h4>Review & Refine</h4><p>You review, give feedback, and we make it perfect.</p></div>
+    <div class="step"><div class="step-num">04</div><h4>Launch & Support</h4><p>Your site goes live — and we're here if you need us.</p></div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="why-left">
+    <div class="section-eyebrow">Why Choose Us</div>
+    <h2 class="section-title">Local Team.<br/>Real Results.</h2>
+    <p>We are a Dindigul-based web team helping Tamil Nadu businesses grow online. We speak your language, understand your market, and deliver on time — always. No middlemen, no hidden fees.</p>
+    <button class="btn-dark" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Work With Us →</button>
+  </div>
+  <div class="why-right">
+    <div class="wstat"><div class="wnum">50+</div><div class="wlbl">Sites Delivered</div></div>
+    <div class="wstat"><div class="wnum">5★</div><div class="wlbl">Client Rating</div></div>
+    <div class="wstat"><div class="wnum">7d</div><div class="wlbl">Avg Turnaround</div></div>
+    <div class="wstat"><div class="wnum">100%</div><div class="wlbl">Satisfaction</div></div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="section-eyebrow">Transparent Pricing</div>
+  <h2 class="section-title">Simple Packages</h2>
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-lbl">Starter</div>
+      <h3>Basic Site</h3>
+      <div class="plan-price">₹4,999<sub> one-time</sub></div>
+      <ul><li>Up to 3 Pages</li><li>Mobile Responsive</li><li>Contact Form</li><li>5 Day Delivery</li><li>1 Revision Round</li></ul>
+      <button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+    </div>
+    <div class="plan hot">
+      <div class="plan-lbl">Most Popular</div>
+      <h3>Business Site</h3>
+      <div class="plan-price">₹9,999<sub> one-time</sub></div>
+      <ul><li>Up to 6 Pages</li><li>Mobile Responsive</li><li>WhatsApp Integration</li><li>Google Maps</li><li>3 Revision Rounds</li><li>1 Month Free Support</li></ul>
+      <button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+    </div>
+    <div class="plan">
+      <div class="plan-lbl">Premium</div>
+      <h3>Full Package</h3>
+      <div class="plan-price">₹19,999<sub> one-time</sub></div>
+      <ul><li>Unlimited Pages</li><li>E-Commerce Ready</li><li>SEO Optimized</li><li>Blog / News Section</li><li>Unlimited Revisions</li><li>3 Months Free Support</li></ul>
+      <button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h2>Let's Build Something Great</h2>
+    <p>Tell us about your project — we'll reply within 24 hours with a free quote.</p>
+    <div class="cd"><div class="cd-lbl">Phone / WhatsApp</div><div class="cd-val">+91 63824 99522</div></div>
+    <div class="cd"><div class="cd-lbl">Email</div><div class="cd-val">sanjeevsanjeev36601@gmail.com</div></div>
+    <div class="cd"><div class="cd-lbl">Location</div><div class="cd-val">Dindigul, Tamil Nadu</div></div>
+  </div>
+  <div class="form">
+    <div class="form-row">
+      <input type="text" placeholder="Your Name *"/>
+      <input type="tel" placeholder="Phone Number *"/>
+    </div>
+    <input type="email" placeholder="Email Address"/>
+    <select><option value="" disabled selected>What do you need?</option><option>Business Website</option><option>Portfolio Site</option><option>Landing Page</option><option>E-Commerce Store</option><option>Website Redesign</option><option>Something Else</option></select>
+    <input type="text" placeholder="Budget (e.g. ₹5,000 – ₹10,000)"/>
+    <textarea placeholder="Tell us about your business..."></textarea>
+    <button class="submit-btn" onclick="alert('Thank you! We will contact you within 24 hours. 🙏')">Send Free Quote Request →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Sanjeev <span>Web</span> Solutions</div>
+  <div class="footer-copy">© 2025 Sanjeev Web Solutions · Dindigul, Tamil Nadu</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${mx-5}px,${my-5}px)`;});
+(function anim(){rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(anim);})();
+document.querySelectorAll('button,a,.svc,.wstat').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('expand'));el.addEventListener('mouseleave',()=>ring.classList.remove('expand'));});
+</script>
+</body>
+</html>
